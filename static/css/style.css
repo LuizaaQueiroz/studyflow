@@ -1,0 +1,98 @@
+body {
+  background-color: #0f0f14;
+  color: #e4e4e7;
+  font-family: 'Sora', sans-serif;
+}
+
+/* superfícies */
+.card-surface {
+  background: #18181f;
+  border: 1px solid #27272e;
+}
+
+/* inputs */
+.app-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background: #0f0f14;
+  border: 1px solid #27272e;
+  color: #e4e4e7;
+}
+
+/* botão principal */
+.primary-btn {
+  background: #a78bfa;
+  color: #0f0f14;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* botão secundário */
+.secondary-btn {
+  background: #27272e;
+  color: #a1a1aa;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+/* textos */
+.label-muted {
+  color: #71717a;
+}
+
+.empty-state-text {
+  color: #3f3f46;
+}
+
+/* tabs */
+.tab-btn {
+  color: #52525b;
+}
+
+.tab-active {
+  color: #a78bfa;
+  border-bottom: 2px solid #a78bfa;
+}
+
+/* timer */
+.timer-display {
+  font-family: 'Space Mono', monospace;
+}
+
+.timer-label {
+  color: #71717a;
+}
+
+/* estatísticas */
+.stat-main {
+  color: #e4e4e7;
+}
+
+.stat-accent {
+  color: #a78bfa;
+}
+
+.stat-success {
+  color: #4ade80;
+}
+
+.stat-pink {
+  color: #f472b6;
+}
+
+/* detalhes */
+.icon-sm {
+  width: 14px;
+  height: 14px;
+}
+
+.inline-icon {
+  vertical-align: -2px;
+}
+
+/* fundo com efeito */
+.noise-bg {
+  background-color: #0f0f14;
+}

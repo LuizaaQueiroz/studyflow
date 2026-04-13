@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ambiente virtual
+venv/
+.env/
+.env
+
+# VSCode
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Banco de dados SQLite
+*.db
+
+# Arquivos temporários
+*.tmp
+
+# Node 
+node_modules/
+
+# Cache
+.cache/
+
+# Arquivos de build
+dist/
+build/
+
+# Arquivos de upload 
+uploads/
