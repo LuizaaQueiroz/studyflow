@@ -1,192 +1,114 @@
-<!doctype html>
-<html lang="pt-BR" class="h-full">
+<!DOCTYPE html>
+
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Flow</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-
-  <!-- Ícones -->
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>VestibuLab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
 </head>
 
-<body class="h-full">
-  <div id="app" class="h-full w-full noise-bg overflow-auto scroll-area">
+<body>
 
-    <!-- HEADER -->
-    <header class="px-6 pt-6 pb-4 flex items-center justify-between">
-      <div>
-        <h1 id="appTitle" class="text-2xl font-bold tracking-tight">Study Flow</h1>
-        <p id="motivationText" class="text-sm mt-1 label-muted">
-          Cada minuto de estudo te aproxima do objetivo.
-        </p>
-      </div>
-    </header>
+<div class="app">
 
-    <!-- TABS -->
-    <nav class="px-6 flex gap-6 border-b app-border">
-      <button data-tab="sessions" class="tab-btn tab-active pb-3 text-sm font-medium">
-        <i data-lucide="book-open" class="icon-sm inline-icon"></i> Sessões
-      </button>
+  <!-- SIDEBAR -->
 
-      <button data-tab="timer" class="tab-btn pb-3 text-sm font-medium">
-        <i data-lucide="timer" class="icon-sm inline-icon"></i> Pomodoro
-      </button>
+  <aside class="sidebar">
+    <h2 class="logo">VestibuLab</h2>
 
-      <button data-tab="stats" class="tab-btn pb-3 text-sm font-medium">
-        <i data-lucide="bar-chart-3" class="icon-sm inline-icon"></i> Estatísticas
-      </button>
-    </nav>
 
-    <!-- ================= SESSÕES ================= -->
-    <section id="tab-sessions" class="tab-content px-6 py-5">
+<nav>
+  <button class="nav-item active" data-page="painel">
+  <span class="material-symbols-outlined">dashboard</span>
+  Painel
+</button>
 
-      <!-- FORM -->
-      <form id="addForm" class="rounded-xl p-5 mb-6 card-surface fade-in">
+<button class="nav-item" data-page="rendimento">
+  <span class="material-symbols-outlined">trending_up</span>
+  Rendimento
+</button>
 
-        <h2 class="text-sm font-semibold mb-4 section-title">
-          <i data-lucide="plus-circle" class="icon-sm inline-icon"></i>
-          Nova Sessão de Estudo
-        </h2>
+<button class="nav-item" data-page="timer">
+  <span class="material-symbols-outlined">timer</span>
+  Cronômetro
+</button>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+<button class="nav-item" data-page="calendario">
+  <span class="material-symbols-outlined">calendar_month</span>
+  Calendário
+</button>
 
-          <div>
-            <label class="text-xs label-muted">Matéria</label>
-            <input id="subject" type="text" required placeholder="Ex: Matemática" class="app-input">
-          </div>
+<button class="nav-item" data-page="revisoes">
+  <span class="material-symbols-outlined">refresh</span>
+  Revisões
+</button>
 
-          <div>
-            <label class="text-xs label-muted">Tópico</label>
-            <input id="topic" type="text" placeholder="Ex: Derivadas" class="app-input">
-          </div>
+<button class="nav-item" data-page="provas">
+  <span class="material-symbols-outlined">quiz</span>
+  Provas
+</button>
+</nav>
 
-          <div>
-            <label class="text-xs label-muted">Duração (min)</label>
-            <input id="duration" type="number" min="1" required placeholder="30" class="app-input">
-          </div>
 
-        </div>
+  </aside>
 
-        <button type="submit" id="addBtn" class="primary-btn">
-          Registrar Sessão
-        </button>
+  <!-- CONTEÚDO -->
 
-        <span id="addStatus" class="ml-3 text-xs label-muted"></span>
+  <main class="content">
 
-      </form>
 
-      <!-- LISTA -->
-      <div id="sessionList" class="space-y-3"></div>
+<!-- PAINEL -->
+<section id="painel" class="page active">
+  
+  <h1>Painel Geral</h1>
 
-      <p id="emptyState" class="text-center py-12 text-sm empty-state-text">
-        <i data-lucide="inbox" class="empty-state-icon"></i>
-        Nenhuma sessão registrada ainda.<br>
-        Comece adicionando sua primeira sessão!
-      </p>
-
-    </section>
-
-    <!-- ================= TIMER ================= -->
-    <section id="tab-timer" class="tab-content px-6 py-5 hidden">
-
-      <div class="max-w-md mx-auto text-center">
-
-        <div class="card-surface p-8 rounded-2xl">
-
-          <p class="text-xs timer-label mb-2">Pomodoro</p>
-
-          <div id="timerDisplay" class="text-7xl font-bold my-6 timer-display">
-            25:00
-          </div>
-
-          <div class="flex justify-center gap-3 mb-6">
-
-            <button id="timerToggle" class="primary-btn" type="button">
-              <i data-lucide="play" class="icon-sm inline-icon"></i> Iniciar
-            </button>
-
-            <button id="timerReset" class="secondary-btn" type="button">
-              Reset
-            </button>
-
-          </div>
-
-          <div class="flex justify-center gap-2">
-
-            <button class="timer-preset preset-btn" data-minutes="15" type="button">15</button>
-            <button class="timer-preset preset-btn preset-active" data-minutes="25" type="button">25</button>
-            <button class="timer-preset preset-btn" data-minutes="45" type="button">45</button>
-            <button class="timer-preset preset-btn" data-minutes="60" type="button">60</button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ================= STATS ================= -->
-    <section id="tab-stats" class="tab-content px-6 py-5 hidden">
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-
-        <div class="card-surface p-4 rounded-xl">
-          <p class="text-xs label-muted">Sessões</p>
-          <p id="statTotal" class="text-2xl stat-main">0</p>
-        </div>
-
-        <div class="card-surface p-4 rounded-xl">
-          <p class="text-xs label-muted">Horas</p>
-          <p id="statHours" class="text-2xl stat-accent">0</p>
-        </div>
-
-        <div class="card-surface p-4 rounded-xl">
-          <p class="text-xs label-muted">Concluídas</p>
-          <p id="statCompleted" class="text-2xl stat-success">0</p>
-        </div>
-
-        <div class="card-surface p-4 rounded-xl">
-          <p class="text-xs label-muted">Matérias</p>
-          <p id="statSubjects" class="text-2xl stat-pink">0</p>
-        </div>
-
-      </div>
-
-      <div class="card-surface p-5 rounded-xl">
-
-        <h3 class="text-sm font-semibold mb-4 section-title">
-          <i data-lucide="pie-chart" class="icon-sm inline-icon"></i>
-          Por Matéria
-        </h3>
-
-        <div id="subjectBreakdown"></div>
-
-        <p id="noStats" class="text-center text-sm empty-state-text">
-          Sem dados ainda
-        </p>
-
-      </div>
-
-    </section>
-
+  <div class="cards">
+    <div class="card"><p>Rendimento Médio</p><h2 id="avgPerf">--</h2></div>
+    <div class="card"><p>Total Estudado</p><h2 id="totalHours">0h</h2></div>
+    <div class="card"><p>Revisões Pendentes</p><h2 id="pendingReviews">0</h2></div>
+    <div class="card"><p>Provas Feitas</p><h2 id="totalExams">0</h2></div>
   </div>
 
-  <!-- JS -->
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <div class="panel-box">
+    <h3>⚠️ Pontos Fracos</h3>
+    <div id="weakPoints">Nenhum dado ainda</div>
+  </div>
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <div class="panel-box">
+    <h3>📅 Próximas Revisões</h3>
+    <div id="nextReviews">Nenhuma revisão</div>
+  </div>
+</section>
+
+<!-- RENDIMENTO -->
+<section id="rendimento" class="page">
+  <h1>🎯 Registrar Rendimento</h1>
+
+  <form id="formPerformance">
+    <input type="text" id="subject" placeholder="Matéria">
+    <input type="text" id="content" placeholder="Conteúdo">
+    <input type="number" id="total" placeholder="Total de questões">
+    <input type="number" id="correct" placeholder="Acertos">
+    <button type="submit">Salvar</button>
+  </form>
+
+  <div id="performanceList"></div>
+</section>
+
+<!-- TIMER -->
+<section id="timer" class="page">
+  <h1>⏱ Cronômetro</h1>
+  <div id="timerDisplay">25:00</div>
+  <button id="startTimer">Iniciar</button>
+</section>
+
+
+  </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 const state = {
   sessions: [],
+  exerciseRecords: [],
   timerSeconds: 25 * 60,
   timerRunning: false,
   timerInterval: null,
@@ -211,6 +212,7 @@ async function findOrCreateContent(name, subjectId) {
   });
 }
 
+
 function renderSessions() {
   const container = document.getElementById("sessionList");
   const empty = document.getElementById("emptyState");
@@ -385,4 +387,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   lucide.createIcons();
   await ensureSetup();
   await loadSessions();
+});
+
+document.querySelectorAll(".nav-item").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const page = btn.dataset.page;
+
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(page).classList.add("active");
+  });
 });
